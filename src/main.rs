@@ -1,3 +1,5 @@
+mod game_object;
+
 fn main() {
-    println!("Hello, world!");
+    game_object::init_map();
 }
