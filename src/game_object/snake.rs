@@ -1,4 +1,4 @@
-use crate::game_object::{ GObject, Position };
+use crate::game_object::{ GameObjectWorker, Position };
 
 pub struct Snake {
     pub display: &'static str,
@@ -6,7 +6,7 @@ pub struct Snake {
     pub body_position: Vec<Position>,
 }
 
-impl GObject for Snake {
+impl GameObjectWorker for Snake {
     fn make(&self, y: usize, x: usize) -> &'static str {
         if y == self.head_position.0 && x == self.head_position.1 {
             self.display

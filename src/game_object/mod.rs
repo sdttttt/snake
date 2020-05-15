@@ -11,6 +11,8 @@ pub const WIDTH: usize = 20;
 pub const HEIGTH: usize = 50;
 
 // this is Global variable.
+// Store all the Object worker information.
+// 全局变量, 存放所有的对象工人信息.
 lazy_static! {
     static ref WALL: Wall = Wall { display: "*" };
     static ref SNAKE: Snake = Snake {
@@ -20,16 +22,22 @@ lazy_static! {
     };
 }
 
-pub trait GObject {
+// GameObject Worker. 
+// The Worker is responsible for controlling the Object
+// and give the Object position information.
+// 游戏对象工人，工人负责控制对象, 绘制出对象位置和信息等
+pub trait GameObjectWorker {
     fn make(&self, y: usize, x: usize) -> &'static str;
 }
 
+// Game Object Position.
 pub struct Position(usize, usize);
 
-pub fn init_map() {
+pub fn refresh() {
     // Game Map
     let mut map: Vec<Vec<&str>> = Vec::new();
 
+    // look all node of Game Map.
     for x in 0..WIDTH {
         let mut row: Vec<&str> = Vec::new();
         for y in 0..HEIGTH {
@@ -50,6 +58,7 @@ pub fn init_map() {
     render_map(map);
 }
 
+// Oh, this is a Render !!
 fn render_map(map: Vec<Vec<&str>>) {
     for dd in map {
         for bb in dd {
