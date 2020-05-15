@@ -16,7 +16,6 @@ impl GObject for Snake {
                     return self.display;
                 };
             }
-
             ""
         }
     }
