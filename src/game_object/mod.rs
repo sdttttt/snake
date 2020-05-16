@@ -14,15 +14,15 @@ pub const HEIGTH: usize = 50;
 // Store all the Object worker information.
 // 全局变量, 存放所有的对象工人信息.
 lazy_static! {
-    static ref WALL: Wall = Wall { display: "*" };
-    static ref SNAKE: Snake = Snake {
-        display: "*",
-        head_position: Position(5, 5),
-        body_position: vec![Position(5, 4), Position(5, 3), Position(5, 2)]
-    };
+    static ref WALL: Wall = Wall::new("*");
+    static ref SNAKE: Snake = Snake::new(
+        "*",
+        Position(5, 5),
+        vec![Position(5, 4), Position(5, 3), Position(5, 2)]
+    );
 }
 
-// GameObject Worker. 
+// GameObject Worker.
 // The Worker is responsible for controlling the Object
 // and give the Object position information.
 // 游戏对象工人，工人负责控制对象, 绘制出对象位置和信息等
@@ -32,6 +32,10 @@ pub trait GameObjectWorker {
 
 // Game Object Position.
 pub struct Position(usize, usize);
+
+// pub fn game_initializer() {
+//     let (sender, receiver) = mpsc::channel();
+// }
 
 pub fn refresh() {
     // Game Map
@@ -43,7 +47,6 @@ pub fn refresh() {
         for y in 0..HEIGTH {
             let wall = WALL.make(x, y);
             let snake = SNAKE.make(x, y);
-
             if wall != "" {
                 row.push(wall);
             } else if snake != "" {
@@ -54,7 +57,6 @@ pub fn refresh() {
         }
         map.push(row);
     }
-
     render_map(map);
 }
 
