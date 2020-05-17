@@ -33,10 +33,6 @@ pub trait GameObjectWorker {
 // Game Object Position.
 pub struct Position(usize, usize);
 
-// pub fn game_initializer() {
-//     let (sender, receiver) = mpsc::channel();
-// }
-
 pub fn refresh() {
     // Game Map
     let mut map: Vec<Vec<&str>> = Vec::new();
@@ -54,6 +50,7 @@ pub fn refresh() {
             } else {
                 row.push(make_open_space());
             }
+            
         }
         map.push(row);
     }
@@ -69,3 +66,4 @@ fn render_map(map: Vec<Vec<&str>>) {
         println!("");
     }
 }
+
