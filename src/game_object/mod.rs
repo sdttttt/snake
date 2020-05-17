@@ -1,7 +1,8 @@
 mod open_space;
-mod snake;
 mod wall;
+pub mod snake;
 
+use std::sync::Mutex;
 use lazy_static::lazy_static;
 use open_space::make_open_space;
 use snake::Snake;
@@ -20,6 +21,15 @@ lazy_static! {
         Position(5, 5),
         vec![Position(5, 4), Position(5, 3), Position(5, 2)]
     );
+
+    static ref DIRECT: Mutex<Direction> = Mutex::new(Direction::RIGHT);
+}
+
+pub enum Direction {
+    TOP,
+    LEFT,
+    RIGHT,
+    BUTTOM,
 }
 
 // GameObject Worker.
@@ -43,6 +53,7 @@ pub fn refresh() {
         for y in 0..HEIGTH {
             let wall = WALL.make(x, y);
             let snake = SNAKE.make(x, y);
+
             if wall != "" {
                 row.push(wall);
             } else if snake != "" {
@@ -55,6 +66,19 @@ pub fn refresh() {
         map.push(row);
     }
     render_map(map);
+}
+
+pub fn change_snake_move(input: String) {
+
+    let mut dt = DIRECT.lock().unwrap();
+
+    *dt = match input.as_str() {
+        "a" => Direction::LEFT,
+        "w" => Direction::TOP,
+        "d" => Direction::RIGHT,
+        "s" => Direction::BUTTOM,
+        _ => return,
+    };
 }
 
 // Oh, this is a Render !!

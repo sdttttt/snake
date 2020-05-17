@@ -1,33 +1,18 @@
 use crate::game_object::{ GameObjectWorker, Position };
 
-pub enum Direction {
-    TOP,
-    LEFT,
-    RIGHT,
-    BUTTOM,
-}
-
 pub struct Snake {
     pub display: &'static str,
     pub head_position: Position,
     pub body_position: Vec<Position>,
-
-    pub direct: Direction,
 }
 
 impl Snake {
     pub fn new(display: &'static str, head_position: Position, body_position: Vec<Position>) -> Self {
-        let direct = Direction::RIGHT;
         Self {
             display,
             head_position,
             body_position,
-            direct,
         }
-    }
-
-    pub fn change_move_direction(&mut self, dt: Direction) {
-        self.direct = dt;
     }
 }
 
