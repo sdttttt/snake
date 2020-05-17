@@ -9,7 +9,7 @@ use snake::Snake;
 use wall::Wall;
 
 pub const WIDTH: usize = 20;
-pub const HEIGTH: usize = 50;
+pub const HEIGHT: usize = 50;
 
 // this is Global variable.
 // Store all the Object worker information.
@@ -29,7 +29,7 @@ pub enum Direction {
     TOP,
     LEFT,
     RIGHT,
-    BUTTOM,
+    BOTTOM,
 }
 
 // GameObject Worker.
@@ -50,7 +50,7 @@ pub fn refresh() {
     // look all node of Game Map.
     for x in 0..WIDTH {
         let mut row: Vec<&str> = Vec::new();
-        for y in 0..HEIGTH {
+        for y in 0..HEIGHT {
             let wall = WALL.make(x, y);
             let snake = SNAKE.make(x, y);
 
@@ -76,7 +76,7 @@ pub fn change_snake_move(input: String) {
         "a" => Direction::LEFT,
         "w" => Direction::TOP,
         "d" => Direction::RIGHT,
-        "s" => Direction::BUTTOM,
+        "s" => Direction::BOTTOM,
         _ => return,
     };
 }
